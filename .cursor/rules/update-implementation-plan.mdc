@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Implementation plan verification 
+
+- Before making any changes to the code verify the [implementation-plan.md](mdc:instructions/implementation-plan.md)
+- Keep the implementation plan up to date 
+- When done with a task update the implementation plan 
