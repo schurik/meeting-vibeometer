@@ -12,12 +12,8 @@ alwaysApply: true
 - github repository: schurik/meeting-vibeometer
 
 - NEVER change files remote
-
-- When creating an issue:
-  * use concise and clear title
-  * be presize on the description and do not generate to much text
    
-- When asked to start implementation of an issue:
+- When asked to start implementation of a task:
   1. create the new branch AND checkout it localy
   2. push branch to remote
   3. ALWAYS checkout new branch
