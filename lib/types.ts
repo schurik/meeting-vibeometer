@@ -33,4 +33,10 @@ export interface CreateMeetingInput {
   description?: string;
   start_time?: string;
   end_time?: string;
+}
+
+export interface SubmitMoodInput {
+  meeting_id: string;
+  participant_id?: string;
+  mood_value: number;
 } 
