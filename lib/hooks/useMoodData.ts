@@ -109,3 +109,4 @@ export function useMoodData(meetingId: string) {
     error: state.error,
     aggregated,
   };
+}
