@@ -108,7 +108,7 @@ CREATE TABLE feedback (
 - [x] Generate unique meeting codes
 - [x] Build participant join page
 - [x] Implement mood selection component
-- [ ] Set up Supabase Realtime subscriptions
+- [x] Set up Supabase Realtime subscriptions
 - [ ] Create current mood visualization component
 - [ ] Build basic presenter dashboard
 

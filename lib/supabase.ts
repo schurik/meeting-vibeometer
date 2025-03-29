@@ -1,5 +1,5 @@
-
 import { createClient } from '@supabase/supabase-js';
+import { Database } from '@/lib/database.types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -8,7 +8,26 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Create a Supabase client with proper typing
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+  realtime: {
+    params: {
+      eventsPerSecond: 10,
+    },
+  },
+});
+
+// Enable realtime subscriptions for specific tables
+export async function setupRealtimeSubscriptions() {
+  await supabase
+    .channel('schema-db-changes')
+    .on('postgres_changes', {
+      event: '*',
+      schema: 'public',
+      table: 'mood_data',
+    }, (payload) => console.log('Change received!', payload))
+    .subscribe();
+}
 
 export async function generateMeetingCode(): Promise<string> {
   const characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Removed similar looking characters
