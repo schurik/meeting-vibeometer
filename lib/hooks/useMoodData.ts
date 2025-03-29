@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getMeetingMoodData, subscribeMoodData, supabase } from '@/lib/supabase';
 import { MoodData } from '@/lib/types';
 
 interface MoodDataState {
@@ -73,11 +73,7 @@ export function useMoodData(meetingId: string) {
   useEffect(() => {
     const fetchMoodData = async () => {
       try {
-        const { data, error } = await supabase
-          .from('mood_data')
-          .select('*')
-          .eq('meeting_id', meetingId)
-          .order('timestamp', { ascending: false });
+        const { data, error } = await getMeetingMoodData(meetingId);
 
         if (error) {
           throw error;
@@ -95,21 +91,12 @@ export function useMoodData(meetingId: string) {
 
   // Subscribe to realtime changes
   useEffect(() => {
-    const channel = supabase
-      .channel(`mood-data-${meetingId}`)
-      .on('postgres_changes', {
-        event: 'INSERT',
-        schema: 'public',
-        table: 'mood_data',
-        filter: `meeting_id=eq.${meetingId}`,
-      }, (payload) => {
-        const newMood = payload.new as MoodData;
-        setState(prevState => ({
-          ...prevState,
-          data: [newMood, ...prevState.data],
-        }));
-      })
-      .subscribe();
+    const channel = subscribeMoodData(meetingId, (newMood) => {
+      setState(prevState => ({
+        ...prevState,
+        data: [newMood, ...prevState.data],
+      }));
+    });
 
     return () => {
       supabase.removeChannel(channel);

@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { supabase } from '@/lib/supabase';
+import { getMeetingTitleByCode, getMeetingByCode } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import MoodSelection from '@/components/MoodSelection';
 import MoodVisualization from '@/components/MoodVisualization';
@@ -9,11 +9,7 @@ export async function generateMetadata({
 }: {
   params: { code: string };
 }): Promise<Metadata> {
-  const { data: meeting } = await supabase
-    .from('meetings')
-    .select('title')
-    .eq('meeting_code', params.code.toUpperCase())
-    .single();
+  const { data: meeting } = await getMeetingTitleByCode(params.code);
 
   return {
     title: meeting ? `${meeting.title} | Meeting Vibeometer` : 'Meeting',
@@ -62,14 +58,4 @@ export default async function MeetingPage({
       </div>
     </div>
   );
-}
-
-export async function getMeetingByCode(code: string) {
-  const { data, error } = await supabase
-    .from('meetings')
-    .select('*')
-    .eq('meeting_code', code)
-    .single();
-
-  return { data, error };
 }
