@@ -94,7 +94,7 @@ CREATE TABLE feedback (
 - [x] Create GitHub repository
 - [x] Initialize Next.js project
 - [x] Configure Tailwind CSS v4
-- [ ] Set up Supabase account and project
+- [x] Set up Supabase account and project
 - [ ] Create database tables in Supabase
 
 ### 5.2 Phase 2: Meeting Setup and Mood Tracking (1 week)
