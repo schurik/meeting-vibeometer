@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getActiveMeetingByCode } from '@/lib/supabase';
 
 export default async function JoinPage({
   searchParams,
@@ -13,12 +13,7 @@ export default async function JoinPage({
   }
 
   // Check if meeting exists
-  const { data: meeting, error } = await supabase
-    .from('meetings')
-    .select('*')
-    .eq('meeting_code', code)
-    .eq('status', 'active')
-    .single();
+  const { data: meeting, error } = await getActiveMeetingByCode(code);
 
   if (error || !meeting) {
     // If meeting doesn't exist, redirect back to home with an error
