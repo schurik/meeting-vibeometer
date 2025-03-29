@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { supabase } from '@/lib/supabase';
-import { Meeting } from '@/lib/types';
 import { notFound } from 'next/navigation';
 import MoodSelection from '@/components/MoodSelection';
 
@@ -27,13 +26,7 @@ export default async function MeetingPage({
   params: { code: string };
 }) {
   const code = params.code.toUpperCase();
-
-  // Fetch meeting details
-  const { data: meeting, error } = await supabase
-    .from('meetings')
-    .select('*')
-    .eq('meeting_code', code)
-    .single();
+  const { data: meeting, error } = await getMeetingByCode(code);
 
   if (error || !meeting) {
     notFound();
@@ -70,4 +63,14 @@ export default async function MeetingPage({
       </div>
     </div>
   );
-} 
+}
+
+export async function getMeetingByCode(code: string) {
+  const { data, error } = await supabase
+    .from('meetings')
+    .select('*')
+    .eq('meeting_code', code)
+    .single();
+
+  return { data, error };
+}
