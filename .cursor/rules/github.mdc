@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Use Github MCP
+
+- When asked to interact with git or github prefer using the Github MCP tools over plain git commands
+  
+- github owner: schurik
+- github repository: schurik/meeting-vibeometer
+
+- NEVER change files remote
+
+- When creating an issue:
+  * use concise and clear title
+  * be presize on the description and do not generate to much text
+   
+- When asked to start implementation of an issue:
+  1. create the new branch AND checkout it localy
+  2. push branch to remote
+  3. ALWAYS checkout new branch
+  4. ALWAYS proceed with the implementation on LOCAL branch
+  5. at the end commit, push and create pull request
+ 
+- When creating new branch:
+  * allways create new branch from main branch
+  * use branch prefixes:
+  * for new feature use: feature/
+  * for fixing a bug use: bug/
+   
