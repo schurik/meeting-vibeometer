@@ -1,0 +1,45 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# FILE STRUCTURE
+
+.
+├── README.md
+├── app
+│   ├── create
+│   │   └── page.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── join
+│   │   └── page.tsx
+│   ├── layout.tsx
+│   ├── meeting
+│   │   └── [code]
+│   │       └── page.tsx
+│   ├── not-found.tsx
+│   └── page.tsx
+├── components
+│   └── CreateMeetingForm.tsx
+├── eslint.config.mjs
+├── instructions
+│   ├── implementation-plan.md
+│   └── meeting-vibeometer.md
+├── lib
+│   ├── actions.ts
+│   ├── supabase.ts
+│   └── types.ts
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── public
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+└── tsconfig.json
