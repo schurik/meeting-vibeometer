@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { supabase } from '@/lib/supabase';
-import { Meeting } from '@/lib/types';
 import { notFound } from 'next/navigation';
+import MoodSelection from '@/components/MoodSelection';
 
 export async function generateMetadata({
   params,
@@ -26,13 +26,7 @@ export default async function MeetingPage({
   params: { code: string };
 }) {
   const code = params.code.toUpperCase();
-
-  // Fetch meeting details
-  const { data: meeting, error } = await supabase
-    .from('meetings')
-    .select('*')
-    .eq('meeting_code', code)
-    .single();
+  const { data: meeting, error } = await getMeetingByCode(code);
 
   if (error || !meeting) {
     notFound();
@@ -64,25 +58,19 @@ export default async function MeetingPage({
             </p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-xl font-semibold mb-4">Participant Controls</h2>
-            <p className="text-gray-600 mb-4">
-              This is a placeholder for the mood selection component that will be implemented in Phase 2.
-            </p>
-            <div className="grid grid-cols-5 gap-3">
-              {[1, 2, 3, 4, 5].map((value) => (
-                <button
-                  key={value}
-                  disabled
-                  className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-4 rounded disabled:opacity-50"
-                >
-                  {value}
-                </button>
-              ))}
-            </div>
-          </div>
+          <MoodSelection meetingId={meeting.id} meetingCode={meeting.meeting_code} />
         </div>
       </div>
     </div>
   );
-} 
+}
+
+export async function getMeetingByCode(code: string) {
+  const { data, error } = await supabase
+    .from('meetings')
+    .select('*')
+    .eq('meeting_code', code)
+    .single();
+
+  return { data, error };
+}

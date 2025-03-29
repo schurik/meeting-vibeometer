@@ -106,8 +106,8 @@ CREATE TABLE feedback (
 #### 5.2.1 Tasks
 - [x] Create meeting creation page
 - [x] Generate unique meeting codes
-- [ ] Build participant join page
-- [ ] Implement mood selection component
+- [x] Build participant join page
+- [x] Implement mood selection component
 - [ ] Set up Supabase Realtime subscriptions
 - [ ] Create current mood visualization component
 - [ ] Build basic presenter dashboard
