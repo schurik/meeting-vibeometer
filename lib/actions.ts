@@ -35,4 +35,4 @@ export async function submitMoodValue(data: SubmitMoodInput): Promise<{ success:
     console.error('Error submitting mood:', error);
     return { success: false, error: 'Failed to submit mood' };
   }
-} 
+}

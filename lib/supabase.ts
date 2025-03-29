@@ -130,4 +130,4 @@ export async function generateMeetingCode(): Promise<string> {
   }
 
   return code;
-} 
+}

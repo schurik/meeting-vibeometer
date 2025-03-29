@@ -22,4 +22,4 @@ export default async function JoinPage({
 
   // If meeting exists, redirect to the meeting page
   redirect(`/meeting/${meeting.meeting_code}`);
-} 
+}
