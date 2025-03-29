@@ -1,7 +1,7 @@
 ---
-description: 
+description: Starting implementation of new feature requires some initial setup. This rule should be used when interacting with github.
 globs: 
-alwaysApply: true
+alwaysApply: false
 ---
 
 # Use Github MCP
