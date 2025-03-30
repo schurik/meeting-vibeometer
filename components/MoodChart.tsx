@@ -121,7 +121,7 @@ export default function MoodChart({ meetingId, initialMoodData = [] }: MoodChart
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
+          label: function (context: { dataset: { label?: string }; parsed: { y: number | null } }) {
             let label = context.dataset.label || '';
             if (label) {
               label += ': ';

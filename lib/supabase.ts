@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { Database } from '@/lib/database.types';
 import { CreateMeetingInput, Meeting, SubmitMoodInput, MoodData } from './types';
+import { PostgrestError } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -44,7 +45,7 @@ export async function getMeetingTitleByCode(code: string) {
     .single();
 }
 
-export async function createNewMeeting(data: CreateMeetingInput): Promise<{ data: Meeting | null; error: any }> {
+export async function createNewMeeting(data: CreateMeetingInput): Promise<{ data: Meeting | null; error: PostgrestError | null }> {
   const meeting_code = await generateMeetingCode();
 
   return await supabase

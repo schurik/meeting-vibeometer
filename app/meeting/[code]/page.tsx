@@ -7,9 +7,10 @@ import MoodVisualization from '@/components/MoodVisualization';
 export async function generateMetadata({
   params,
 }: {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 }): Promise<Metadata> {
-  const { data: meeting } = await getMeetingTitleByCode(params.code);
+  const resolvedParams = await params;
+  const { data: meeting } = await getMeetingTitleByCode(resolvedParams.code);
 
   return {
     title: meeting ? `${meeting.title} | Meeting Vibeometer` : 'Meeting',
@@ -20,9 +21,10 @@ export async function generateMetadata({
 export default async function MeetingPage({
   params,
 }: {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 }) {
-  const code = params.code.toUpperCase();
+  const resolvedParams = await params;
+  const code = resolvedParams.code.toUpperCase();
   const { data: meeting, error } = await getMeetingByCode(code);
 
   if (error || !meeting) {
