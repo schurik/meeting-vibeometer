@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
+import PresenterNavForm from '@/components/PresenterNavForm';
 
 export const metadata: Metadata = {
   title: 'Meeting Vibeometer',
@@ -59,6 +60,8 @@ export default function Home() {
             </Link>
           </div>
         </div>
+
+        <PresenterNavForm />
 
         <div className="mt-16 grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           <div className="bg-white p-6 rounded-lg shadow-sm">
