@@ -1,17 +1,17 @@
 import React from 'react';
-import { getMeetingDetails, getInitialMoodData } from '@/lib/actions'; // Import new action
-import { Meeting, MoodData } from '@/lib/types'; // Import MoodData type
-import MoodChart from '@/components/MoodChart'; // Import the chart component
+import { getMeetingDetails, getInitialMoodData } from '@/lib/actions';
+import MoodChart from '@/components/MoodChart';
 
 interface PresenterPageProps {
-  params: {
+  params: Promise<{
     meeting_code: string;
-  };
+  }>;
 }
 
 // Make the component async to use await
 export default async function PresenterPage({ params }: PresenterPageProps) {
-  const { meeting_code } = params;
+  const resolvedParams = await params;
+  const { meeting_code } = resolvedParams;
 
   // Fetch meeting details first
   const meetingDetailsResult = await getMeetingDetails(meeting_code);

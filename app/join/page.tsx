@@ -4,9 +4,10 @@ import { getActiveMeetingByCode } from '@/lib/supabase';
 export default async function JoinPage({
   searchParams,
 }: {
-  searchParams: { code?: string };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const code = searchParams.code?.toUpperCase();
+  const resolvedParams = await searchParams;
+  const code = typeof resolvedParams.code === 'string' ? resolvedParams.code.toUpperCase() : undefined;
 
   if (!code) {
     redirect('/');
