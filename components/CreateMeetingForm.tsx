@@ -45,7 +45,7 @@ export default function CreateMeetingForm() {
 
       if (result.success && result.meeting) {
         reset();
-        router.push(`/meeting/${result.meeting.meeting_code}`);
+        router.push(`/presenter/${result.meeting.meeting_code}`);
       } else {
         setError(result.error || 'Failed to create meeting');
       }
